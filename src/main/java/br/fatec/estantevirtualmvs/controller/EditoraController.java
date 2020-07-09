@@ -16,7 +16,7 @@ import br.fatec.estantevirtualmvs.repository.EditoraRepository;
 
 
 @Controller
-@RequestMapping("/publishing/")
+@RequestMapping("/publisher/")
 public class EditoraController {
 	
 	private final EditoraRepository editoraRepository;

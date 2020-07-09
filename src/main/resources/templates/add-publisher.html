@@ -17,7 +17,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="col-md-10">
-                    <form action="#" th:action="@{/publishing/add}" th:object="${editora}" method="post">
+                    <form action="#" th:action="@{/publisher/add}" th:object="${editora}" method="post">
                         <div class="row">
                             <div class="form-group col-md-8">
                                 <label for="nome" class="col-form-label">Nome</label> <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Titulo">
@@ -36,9 +36,7 @@
                     </form>
                 </div>
             </div>
-            <select th:each="editora : ${editoras}">
-            	 <option th:value="${editora.id}" th:text="${editora.nome}"></option>
-            </select> 
+           
         </div>
     </div>
 </body>

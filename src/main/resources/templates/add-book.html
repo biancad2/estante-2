@@ -40,8 +40,8 @@
                     </form>
                 </div>
             </div>
-            <select th:switch="${editoras}">
-            	
+            <select th:each="editora : ${editoras}">
+            	 <option th:value="${editora.id}" th:text="${editora.nome}"></option>
             </select> 
         </div>
     </div>
