@@ -3,15 +3,28 @@ package br.fatec.estantevirtualmvs.model;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import javax.persistence.InheritanceType;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+
 
 @Table(name="tb_livro")
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public class Livro implements Serializable{
 	private static final long serialVersionUID = 1L;
       @Id
@@ -28,6 +41,10 @@ public class Livro implements Serializable{
        
       @Column(name="descricao", length = 255)
       private String descricao;
+      
+       @ManyToOne
+       @JoinColumn(name="editora_id")
+       private Editora editora;
        
       public Long getId() {
             return id;

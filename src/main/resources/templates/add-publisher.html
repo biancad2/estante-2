@@ -13,25 +13,21 @@
 
 <body>
     <div class="container my-5">
-        <h3> Add Student</h3>
+        <h3> Add Editora</h3>
         <div class="card">
             <div class="card-body">
                 <div class="col-md-10">
-                    <form action="#" th:action="@{/books/add}" th:object="${livro}" method="post">
+                    <form action="#" th:action="@{/publishing/add}" th:object="${editora}" method="post">
                         <div class="row">
                             <div class="form-group col-md-8">
-                                <label for="titulo" class="col-form-label">Título</label> <input type="text" th:field="*{titulo}" class="form-control" id="titulo" placeholder="Titulo">
+                                <label for="nome" class="col-form-label">Nome</label> <input type="text" th:field="*{nome}" class="form-control" id="nome" placeholder="Titulo">
                             </div>
                             <div class="form-group col-md-8">
                                 <label for="descricao" class="col-form-label">Descrição</label> <input type="text" th:field="*{descricao}" class="form-control" id="descricao" placeholder="Descrição"> 
-                            </div>
-
-                            <div class="form-group col-md-8">
-                                <label for="autor" class="col-form-label">Autor</label> <input type="text" th:field="*{autor}" class="form-control" id="phoneNo" placeholder="Autor">
-                            </div>
+                            </div>        
 
                             <div class="col-md-6">
-                                <input type="submit" class="btn btn-primary" value="Add Book">
+                                <input type="submit" class="btn btn-primary" value="Add Editora">
                             </div>
 
                             <div class="form-group col-md-8"></div>
@@ -40,8 +36,8 @@
                     </form>
                 </div>
             </div>
-            <select th:switch="${editoras}">
-            	
+            <select th:each="editora : ${editoras}">
+            	 <option th:value="${editora.id}" th:text="${editora.nome}"></option>
             </select> 
         </div>
     </div>

@@ -20,7 +20,7 @@ import br.fatec.estantevirtualmvs.repository.LivroRepository;
 public class LivroController {
 	
 	private final LivroRepository livroRepository;
-	  
+	
     @Autowired
     public LivroController( LivroRepository livroRepository) {
           this.livroRepository = livroRepository;
@@ -48,28 +48,31 @@ public class LivroController {
     
     @GetMapping("edit/{id}")
     public String showUpdateForm(@PathVariable("id") long id, Model model) {
-        model.addAttribute("livro", livroRepository.findById(id));
-        return "update-book";
+    	Livro livro = livroRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid book Id:" + id));
+		model.addAttribute("livro", livro);
+		return "update-book";
     }
 
     @PostMapping("update/{id}")
-    public String updateBook(@PathVariable("id") long id,  Livro livro, BindingResult result,
-        Model model) {
-        if (result.hasErrors()) {
-            livro.setId(id);
-            return "update-book";
-        }
+    public String updateBook(@PathVariable("id") long id,  Livro livro, BindingResult result, Model model) {
+    	if (result.hasErrors()) {
+			livro.setId(id);
+			return "update-student";
+		}
 
-        livroRepository.save(livro);
-        model.addAttribute("livros", livroRepository.findAll());
-        return "index";
+		livroRepository.save(livro);
+		model.addAttribute("livros", livroRepository.findAll());
+		return "index";
+    		
     }
 
     @GetMapping("delete/{id}")
     public String deleteBook(@PathVariable("id") long id, Model model) {
-    	Livro _livro = livroRepository.findById(id);
-        livroRepository.delete(livroRepository.findById(id));
-        model.addAttribute("livros", studentRepository.findAll());
-        return "index";
+    	Livro livro = livroRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid student Id:" + id));
+		livroRepository.delete(livro);
+		model.addAttribute("livros", livroRepository.findAll());
+		return "index";
     }
 }
